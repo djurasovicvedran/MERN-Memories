@@ -3,9 +3,11 @@ import bodyParser from "body-parser";
 import mongoose, { mongo } from "mongoose";
 import cors from "cors";
 import postRoutes from "./routes/posts.js";
+import dotenv from "dotenv";
 
 // initialize app
 const app = express();
+dotenv.config();
 
 // limit image size
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -17,8 +19,8 @@ app.use(cors());
 app.use("/posts", postRoutes);
 // connect to a database
 // credentials must go into .env folder which must not be uploaded (add to gitignore)
-const CONNECTION_URL =
-  "mongodb+srv://MemoriesAdmin:MemoriesAdmin123@cluster0.l8jxj6g.mongodb.net/?retryWrites=true&w=majority";
+const CONNECTION_URL = process.env.CONNECTION_URL;
+
 const PORT = process.env.PORT || 5000;
 
 mongoose
