@@ -1,8 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import cors from "cors";
 import postRoutes from "./routes/posts.js";
+import userRoutes from "./routes/user.js";
+
 import dotenv from "dotenv";
 
 // initialize app
@@ -17,8 +19,13 @@ app.use(cors());
 // starting path for all the routes inside posts.js
 
 app.use("/posts", postRoutes);
+// users routes
+app.use("/user", userRoutes);
+
 // connect to a database
 // credentials must go into .env folder which must not be uploaded (add to gitignore)
+
+app.get("/", (req, res) => res.send("Hello to memories API"));
 const CONNECTION_URL = process.env.CONNECTION_URL;
 
 const PORT = process.env.PORT || 5000;
